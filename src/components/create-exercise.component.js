@@ -10,8 +10,8 @@ export default class CreateExercise extends Component {
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: "",
@@ -37,6 +37,7 @@ export default class CreateExercise extends Component {
     this.setState({
       username: e.target.value,
     });
+    console.log(this.state.username);
   }
 
   onChangeDescription(e) {
@@ -53,7 +54,7 @@ export default class CreateExercise extends Component {
 
   onChangeDate(date) {
     this.setState({
-      username: date,
+      date: date,
     });
   }
 
@@ -71,7 +72,8 @@ export default class CreateExercise extends Component {
 
     axios
       .post("http://localhost:5000/exercises/add", exercise)
-      .then((res) => console.log(res.data));
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
 
     window.location = "/";
   }
@@ -100,13 +102,23 @@ export default class CreateExercise extends Component {
             </select>
           </div>
           <div className="form-group">
-            <label>Description: (in minutes)</label>
+            <label>Description: </label>
             <input
               type="text"
               required
               className="form-control"
               value={this.state.description}
               onChange={this.onChangeDescription}
+            />
+          </div>
+          <div className="form-group">
+            <label>Duration: (in minutes)</label>
+            <input
+              type="text"
+              required
+              className="form-control"
+              value={this.state.duration}
+              onChange={this.onChangeDuration}
             />
           </div>
           <div className="form-group">
