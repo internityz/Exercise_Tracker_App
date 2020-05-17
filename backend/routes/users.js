@@ -18,16 +18,4 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/:id").delete((req, res) => {
-  User.findByIdAndDelete(req.parms.id)
-    .then(() => res.json("User deleted."))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
-
-router.route("/:id").get((req, res) => {
-  User.findById(req.params.id)
-    .then((exercise) => res.json(exercise))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
-
 module.exports = router;
